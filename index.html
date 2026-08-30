@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Qahwat Rahim - قهوة رحيم | ألذ قهوة في الجزائر</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Amiri:wght@700&family=Playfair+Display:wght@900&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+:root{
+  --espresso:#1E0F0A;
+  --choco:#3E1F0F;
+  --caramel:#C68642;
+  --caramel2:#E6A756;
+  --latte:#FFE8D0;
+  --cream:#FFF8F0;
+  --cream2:#FFF0E0;
+  --gold:#E7B44A;
+  --gold2:#FFD27A;
+  --red:#C0392B;
+}
+body{ font-family:'Cairo',sans-serif; background:var(--cream); color:var(--espresso); overflow-x:hidden; }
+
+/* PROMO BAR */
+.promo{ background:linear-gradient(90deg,#C68642,#E7B44A,#C68642); color:var(--espresso); text-align:center; padding:7px 10px; font-weight:900; font-size:13px; letter-spacing:1px; position:fixed; top:0; left:0; right:0; z-index:1001; }
+.promo span{ background:var(--espresso); color:var(--gold); padding:2px 10px; border-radius:50px; margin:0 8px; }
+
+/* NAV */
+.navbar{ position:fixed; top:32px; left:0; right:0; z-index:1000; background:rgba(30,15,10,0.88); backdrop-filter:blur(16px); padding:14px 32px; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(231,180,74,0.15); }
+.navbar.scrolled{ background:rgba(30,15,10,0.96); padding:10px 32px; }
+.nav-logo{ font-family:'Playfair Display',serif; font-size:30px; font-weight:900; color:var(--gold); line-height:1; }
+.nav-logo span{ display:block; font-family:'Cairo',sans-serif; font-size:11px; letter-spacing:4px; color:var(--latte); font-weight:600; margin-top:2px; }
+.nav-links{ display:flex; gap:26px; list-style:none; align-items:center; }
+.nav-links a{ color:var(--cream); text-decoration:none; font-size:14px; font-weight:700; opacity:0.9; transition:.2s; position:relative; }
+.nav-links a:hover{ color:var(--gold); opacity:1; }
+.nav-links .cta{ background:linear-gradient(135deg,var(--gold),var(--gold2)); color:var(--espresso)!important; padding:9px 22px; border-radius:50px; font-weight:900; box-shadow:0 4px 15px rgba(231,180,74,.4); }
+.hamburger{ display:none; flex-direction:column; gap:5px; cursor:pointer; }
+.hamburger span{ width:26px; height:3px; background:var(--cream); border-radius:2px; }
+
+/* HERO - DELICIOUS SPLIT */
+.hero{ min-height:100vh; padding-top:80px; background:radial-gradient(ellipse at top right,#3E1F0F 0%,#1E0F0A 55%,#0F0705 100%); display:grid; grid-template-columns:1.1fr 0.9fr; align-items:center; position:relative; overflow:hidden; }
+.hero::after{ content:''; position:absolute; bottom:-2px; left:0; right:0; height:80px; background:var(--cream); clip-path:ellipse(75% 100% at 50% 100%); }
+.hero-text{ padding:60px 50px 100px 20px; position:relative; z-index:2; }
+.hero-badge{ display:inline-flex; align-items:center; gap:8px; background:rgba(231,180,74,0.12); border:1px solid rgba(231,180,74,0.35); color:var(--gold2); padding:8px 18px; border-radius:50px; font-size:13px; font-weight:800; margin-bottom:22px; }
+.hero h1{ font-family:'Playfair Display',serif; font-size:78px; font-weight:900; color:var(--cream); line-height:0.95; margin-bottom:16px; }
+.hero h1 em{ font-style:normal; background:linear-gradient(135deg,var(--gold),var(--gold2),#FFF1C1); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.hero h1 i{ font-family:'Amiri',serif; font-size:52px; color:var(--caramel2); display:block; font-weight:700; margin-top:6px; }
+.hero .subtitle{ color:var(--latte); font-size:20px; line-height:1.7; opacity:0.9; margin-bottom:8px; }
+.hero .tagline{ color:var(--gold); font-weight:800; letter-spacing:2px; font-size:14px; margin-bottom:32px; display:flex; align-items:center; gap:10px; }
+.hero .tagline::before{ content:''; width:30px; height:2px; background:var(--gold); display:inline-block; }
+.hero-btns{ display:flex; gap:14px; flex-wrap:wrap; }
+.btn{ padding:15px 32px; border-radius:50px; font-family:'Cairo',sans-serif; font-weight:900; font-size:15px; cursor:pointer; border:none; text-decoration:none; transition:.25s; display:inline-flex; align-items:center; gap:8px; }
+.btn-primary{ background:linear-gradient(135deg,var(--gold),var(--gold2)); color:var(--espresso); box-shadow:0 8px 30px rgba(231,180,74,.45); }
+.btn-primary:hover{ transform:translateY(-3px) scale(1.02); box-shadow:0 14px 40px rgba(231,180,74,.6); }
+.btn-ghost{ background:rgba(255,255,255,0.08); color:var(--cream); border:1px solid rgba(255,255,255,0.18); backdrop-filter:blur(8px); }
+.btn-ghost:hover{ background:rgba(255,255,255,0.14); border-color:var(--gold); }
+
+/* hero image side */
+.hero-visual{ position:relative; height:100%; min-height:600px; display:flex; align-items:center; justify-content:center; padding:40px 40px 100px 0; z-index:2; }
+.hero-card{ position:relative; width:100%; max-width:520px; }
+.hero-photo{ width:100%; height:520px; border-radius:32px; overflow:hidden; position:relative; box-shadow:0 30px 80px rgba(0,0,0,.5),0 0 0 1px rgba(231,180,74,.15); transform:rotate(-1deg); }
+.hero-photo img{ width:100%; height:100%; object-fit:cover; }
+.hero-photo::after{ content:''; position:absolute; inset:0; background:linear-gradient(to top,rgba(30,15,10,.45),transparent 50%); }
+.hero-float{ position:absolute; background:var(--cream); border-radius:20px; padding:14px 18px; display:flex; align-items:center; gap:12px; box-shadow:0 15px 40px rgba(0,0,0,.25); animation:float 3.5s ease-in-out infinite; }
+.hero-float .f-icon{ width:48px; height:48px; border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:22px; }
+.float-1{ top:18px; right:-10px; animation-delay:.2s; }
+.float-1 .f-icon{ background:linear-gradient(135deg,#C68642,#E7B44A); }
+.float-2{ bottom:30px; left:-18px; animation-delay:1s; }
+.float-2 .f-icon{ background:linear-gradient(135deg,#3E1F0F,#6F4E37); color:var(--latte); }
+.hero-float b{ font-size:15px; color:var(--espresso); }
+.hero-float span{ font-size:12px; color:#8D6E63; }
+
+/* steam */
+.steam{ position:absolute; top:40%; left:50%; width:2px; height:80px; background:linear-gradient(to top,rgba(255,255,255,.0),rgba(255,255,255,.35)); border-radius:10px; filter:blur(1px); animation:steam 2.5s ease-in-out infinite; }
+.steam.s2{ left:52%; animation-delay:.7s; height:60px; }
+.steam.s3{ left:48%; animation-delay:1.3s; height:70px; }
+@keyframes steam{ 0%{ transform:translateY(20px) scaleY(.8); opacity:0; } 50%{ opacity:1; } 100%{ transform:translateY(-50px) scaleY(1.2); opacity:0; } }
+@keyframes float{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-10px); } }
+
+/* SECTIONS */
+section{ padding:80px 28px; }
+.section-header{ text-align:center; margin-bottom:50px; max-width:700px; margin-left:auto; margin-right:auto; }
+.section-header .label{ display:inline-block; background:linear-gradient(135deg,rgba(198,134,66,.12),rgba(231,180,74,.18)); border:1px solid rgba(198,134,66,.2); color:var(--caramel); padding:7px 18px; border-radius:50px; font-size:12px; font-weight:900; letter-spacing:2px; margin-bottom:14px; }
+.section-header h2{ font-family:'Playfair Display',serif; font-size:46px; font-weight:900; color:var(--espresso); line-height:1; margin-bottom:14px; }
+.section-header p{ color:#6F4E37; font-size:16px; line-height:1.8; }
+
+/* ABOUT - delicious */
+.about{ background:var(--cream); }
+.about-grid{ display:grid; grid-template-columns:1fr 1fr; gap:50px; max-width:1150px; margin:0 auto; align-items:center; }
+.about-photos{ display:grid; grid-template-columns:1.2fr 0.8fr; gap:14px; }
+.about-photos .ph{ border-radius:20px; overflow:hidden; position:relative; box-shadow:0 12px 30px rgba(62,31,15,.12); }
+.about-photos .ph img{ width:100%; height:100%; object-fit:cover; transition:.5s; }
+.about-photos .ph:hover img{ transform:scale(1.07); }
+.ph-big{ grid-row:span 2; height:420px; }
+.ph-sm{ height:203px; }
+.about-text h3{ font-size:30px; font-weight:900; color:var(--choco); margin-bottom:14px; }
+.about-text p{ color:#6F4E37; line-height:1.9; margin-bottom:14px; font-size:15px; }
+.about-stats{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:22px; }
+.stat{ background:linear-gradient(135deg,#FFF0E0,#FFE8D0); border:1px solid rgba(198,134,66,.15); border-radius:18px; padding:18px 10px; text-align:center; }
+.stat .number{ font-size:28px; font-weight:900; color:var(--caramel); }
+.stat .text{ font-size:12px; font-weight:700; color:var(--choco); }
+
+/* MENU - DELICIOUS CARDS */
+.menu{ background:var(--espresso); position:relative; overflow:hidden; }
+.menu::before{ content:''; position:absolute; inset:0; background:
+  radial-gradient(600px 400px at 10% 10%, rgba(198,134,66,.10), transparent 60%),
+  radial-gradient(500px 500px at 90% 80%, rgba(231,180,74,.07), transparent 60%); pointer-events:none; }
+.menu .section-header h2{ color:var(--cream); }
+.menu .section-header p{ color:rgba(255,232,208,.65); }
+.menu .label{ background:rgba(231,180,74,.12)!important; border-color:rgba(231,180,74,.25)!important; color:var(--gold2)!important; }
+.menu-tabs{ display:flex; justify-content:center; gap:10px; flex-wrap:wrap; margin-bottom:34px; position:relative; z-index:1; }
+.menu-tab{ padding:10px 22px; border-radius:50px; background:rgba(255,248,240,.07); border:1px solid rgba(255,248,240,.10); color:rgba(255,248,240,.7); font-family:'Cairo',sans-serif; font-weight:800; font-size:13px; cursor:pointer; transition:.25s; }
+.menu-tab.active,.menu-tab:hover{ background:var(--gold); color:var(--espresso); border-color:var(--gold); transform:translateY(-1px); }
+.menu-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:22px; max-width:1220px; margin:0 auto; position:relative; z-index:1; }
+.menu-card{ background:rgba(255,248,240,.06); border:1px solid rgba(255,248,240,.08); border-radius:24px; overflow:hidden; transition:.35s; position:relative; backdrop-filter:blur(8px); }
+.menu-card:hover{ transform:translateY(-8px); background:rgba(255,248,240,.10); border-color:rgba(231,180,74,.25); box-shadow:0 20px 50px rgba(0,0,0,.35); }
+.menu-img{ height:190px; position:relative; overflow:hidden; background:#2A160F; }
+.menu-img img{ width:100%; height:100%; object-fit:cover; transition:.6s; }
+.menu-card:hover .menu-img img{ transform:scale(1.08); }
+.menu-img::after{ content:''; position:absolute; inset:0; background:linear-gradient(to top,rgba(30,15,10,.55),transparent 55%); }
+.price-badge{ position:absolute; top:12px; left:12px; background:linear-gradient(135deg,var(--gold),var(--gold2)); color:var(--espresso); padding:7px 14px; border-radius:50px; font-weight:900; font-size:14px; z-index:2; box-shadow:0 6px 18px rgba(231,180,74,.5); }
+.top-badge{ position:absolute; top:12px; right:12px; background:var(--red); color:white; font-size:11px; font-weight:900; padding:5px 10px; border-radius:50px; z-index:2; }
+.menu-body{ padding:18px 18px 16px; }
+.menu-body h3{ color:var(--cream); font-size:18px; font-weight:900; margin-bottom:6px; display:flex; align-items:center; gap:8px; }
+.menu-body .desc{ color:rgba(255,248,240,.55); font-size:13px; line-height:1.6; margin-bottom:12px; min-height:42px; }
+.menu-footer{ display:flex; align-items:center; justify-content:space-between; }
+.tags{ display:flex; gap:6px; flex-wrap:wrap; }
+.menu-tag{ font-size:11px; padding:4px 9px; border-radius:50px; background:rgba(231,180,74,.14); color:var(--gold2); font-weight:700; border:1px solid rgba(231,180,74,.18); }
+.cal{ font-size:11px; color:#FF9B8A; font-weight:700; }
+
+/* 30DA highlight */
+.card-30{ border:2px solid var(--gold)!important; background:linear-gradient(135deg,rgba(231,180,74,.15),rgba(255,248,240,.06))!important; }
+.card-30 .menu-img{ height:200px; }
+
+/* GALLERY with real photos */
+.gallery{ background:var(--cream); }
+.gallery-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:14px; max-width:1200px; margin:0 auto; }
+.g-item{ border-radius:20px; overflow:hidden; position:relative; height:240px; cursor:pointer; box-shadow:0 8px 24px rgba(62,31,15,.08); }
+.g-item img{ width:100%; height:100%; object-fit:cover; transition:.5s; }
+.g-item:hover img{ transform:scale(1.08); }
+.g-item:nth-child(1){ grid-row:span 2; height:auto; }
+.g-item:nth-child(5){ grid-column:span 2; }
+.g-overlay{ position:absolute; inset:0; background:linear-gradient(transparent 40%,rgba(30,15,10,.75)); display:flex; align-items:flex-end; padding:16px; color:white; font-weight:800; font-size:13px; }
+
+/* HOURS */
+.hours-section{ background:linear-gradient(135deg,#FFF0E0,#FFE8D0); }
+.hours-grid{ max-width:620px; margin:0 auto; background:white; border-radius:24px; overflow:hidden; box-shadow:0 12px 40px rgba(62,31,15,.08); border:1px solid rgba(198,134,66,.12); }
+.hour-item{ display:flex; justify-content:space-between; padding:16px 22px; border-bottom:1px solid rgba(62,31,15,.06); font-weight:700; }
+.hour-item:last-child{ border:none; }
+.hour-item .day{ color:var(--choco); }
+.hour-item .time{ color:var(--caramel); background:rgba(198,134,66,.10); padding:4px 12px; border-radius:50px; font-size:13px; }
+
+/* REVIEWS */
+.reviews{ background:var(--cream); }
+.reviews-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; max-width:1100px; margin:0 auto; }
+.review-card{ background:white; border-radius:24px; padding:26px; box-shadow:0 10px 40px rgba(62,31,15,.06); border:1px solid rgba(62,31,15,.06); transition:.25s; }
+.review-card:hover{ transform:translateY(-6px); box-shadow:0 18px 50px rgba(62,31,15,.10); }
+.review-card .q{ font-size:36px; color:var(--gold); line-height:1; }
+.review-card p{ color:#6F4E37; line-height:1.8; font-style:italic; margin:10px 0 16px; font-size:14px; }
+.author{ display:flex; gap:12px; align-items:center; }
+.avatar{ width:44px; height:44px; border-radius:50%; background:linear-gradient(135deg,var(--choco),var(--caramel)); color:var(--latte); display:flex; align-items:center; justify-content:center; font-weight:900; }
+.author b{ font-size:13px; color:var(--espresso); }
+.stars{ color:var(--gold); font-size:12px; }
+
+/* CONTACT */
+.contact{ background:var(--espresso); color:var(--cream); }
+.contact .section-header h2{ color:var(--cream); }
+.contact .section-header p{ color:rgba(255,232,208,.6); }
+.contact-grid{ display:grid; grid-template-columns:1fr 1fr; gap:36px; max-width:1050px; margin:0 auto; }
+.contact-info{ display:flex; flex-direction:column; gap:18px; }
+.c-item{ display:flex; gap:14px; align-items:center; background:rgba(255,248,240,.06); border:1px solid rgba(255,248,240,.08); padding:16px; border-radius:18px; }
+.c-item .ic{ width:50px; height:50px; border-radius:14px; background:linear-gradient(135deg,var(--caramel),var(--gold)); display:flex; align-items:center; justify-content:center; font-size:20px; flex-shrink:0; }
+.c-item h4{ font-size:14px; font-weight:900; margin-bottom:4px; color:var(--latte); }
+.c-item p{ font-size:13px; color:rgba(255,248,240,.6); }
+.contact-form{ background:rgba(255,248,240,.06); border:1px solid rgba(255,248,240,.08); padding:22px; border-radius:22px; display:flex; flex-direction:column; gap:14px; }
+.form-group label{ font-size:12px; font-weight:800; color:var(--gold2); }
+.form-group input,.form-group textarea{ width:100%; padding:12px 16px; border-radius:12px; border:1px solid rgba(255,248,240,.12); background:rgba(255,248,240,.06); color:var(--cream); font-family:'Cairo',sans-serif; }
+.form-group input:focus,.form-group textarea:focus{ outline:none; border-color:var(--gold); background:rgba(255,248,240,.09); }
+
+/* FOOTER */
+.footer{ background:#0F0705; padding:36px; text-align:center; border-top:1px solid rgba(231,180,74,.08); }
+.footer-logo{ font-family:'Playfair Display',serif; font-size:30px; font-weight:900; color:var(--gold); }
+.footer p{ color:rgba(255,248,240,.35); font-size:13px; margin-top:8px; }
+.social{ display:flex; justify-content:center; gap:12px; margin-top:16px; }
+.social a{ width:42px; height:42px; border-radius:50%; background:rgba(255,248,240,.07); display:flex; align-items:center; justify-content:center; color:var(--latte); text-decoration:none; transition:.2s; }
+.social a:hover{ background:var(--gold); color:var(--espresso); }
+
+/* BACK TO TOP */
+.back-to-top{ position:fixed; bottom:22px; left:22px; width:48px; height:48px; border-radius:50%; background:var(--gold); color:var(--espresso); border:none; font-size:18px; display:flex; align-items:center; justify-content:center; box-shadow:0 8px 24px rgba(231,180,74,.45); opacity:0; pointer-events:none; transition:.3s; z-index:999; }
+.back-to-top.visible{ opacity:1; pointer-events:all; }
+
+/* ===== TABLET & MOBILE PERFECT ===== */
+/* Tablet landscape 1024 */
+@media(max-width:1024px){
+  .hero{ grid-template-columns:1fr 1fr; }
+  .hero-text{ padding:40px 24px 100px 10px; }
+  .hero h1{ font-size:62px; }
+  .hero h1 i{ font-size:42px; }
+  .hero-photo{ height:460px; }
+  .about-grid{ gap:32px; }
+  .menu-grid{ grid-template-columns:repeat(2,1fr); }
+  .gallery-grid{ grid-template-columns:repeat(3,1fr); }
+  .reviews-grid{ grid-template-columns:repeat(2,1fr); }
+}
+/* Tablet portrait 900 */
+@media(max-width:900px){
+  .hero{ grid-template-columns:1fr; }
+  .hero-visual{ min-height:480px; padding:10px 20px 90px; order:-1; padding-top:20px; }
+  .hero-photo{ height:420px; transform:none; max-width:520px; margin:0 auto; }
+  .hero-text{ padding:10px 24px 40px; text-align:center; }
+  .hero .tagline::before{ display:none; }
+  .hero .tagline{ justify-content:center; }
+  .hero-btns{ justify-content:center; }
+  .hero-float.float-1{ right:10px; top:10px; scale:.9; }
+  .hero-float.float-2{ left:10px; bottom:70px; scale:.9; }
+  .about-grid{ grid-template-columns:1fr; gap:36px; }
+  .about-photos{ max-width:600px; margin:0 auto; }
+  .contact-grid{ grid-template-columns:1fr; }
+  .reviews-grid{ grid-template-columns:1fr; max-width:560px; }
+  .gallery-grid{ grid-template-columns:repeat(2,1fr); }
+  .g-item:nth-child(5){ grid-column:span 1; }
+}
+/* Mobile 768 */
+@media(max-width:768px){
+  .promo{ font-size:11px; padding:6px 8px; }
+  .navbar{ padding:12px 16px; top:28px; }
+  .nav-links{ display:none; position:fixed; top:68px; left:12px; right:12px; background:rgba(30,15,10,0.98); backdrop-filter:blur(16px); flex-direction:column; padding:22px; gap:16px; border-radius:20px; border:1px solid rgba(231,180,74,.15); box-shadow:0 20px 60px rgba(0,0,0,.4); z-index:999; }
+  .nav-links.open{ display:flex; }
+  .hamburger{ display:flex; width:42px; height:42px; align-items:center; justify-content:center; background:rgba(255,248,240,.08); border-radius:12px; border:1px solid rgba(255,248,240,.12); }
+  section{ padding:56px 16px; }
+  .hero{ padding-top:70px; }
+  .hero h1{ font-size:46px; }
+  .hero h1 i{ font-size:32px; }
+  .hero .subtitle{ font-size:17px; }
+  .hero-badge{ font-size:12px; }
+  .section-header h2{ font-size:32px; }
+  .menu-grid{ grid-template-columns:1fr; gap:16px; }
+  .menu-img{ height:200px; }
+  .btn{ padding:14px 24px; font-size:14px; width:100%; justify-content:center; }
+  .hero-btns{ flex-direction:column; }
+  .about-photos{ grid-template-columns:1fr 1fr; gap:10px; }
+  .ph-big{ height:320px; grid-row:span 1; }
+  .ph-sm{ height:155px; }
+  .about-stats{ gap:8px; }
+  .g-item{ height:180px; }
+  .g-item:nth-child(1){ grid-row:span 1; }
+  .hours-grid{ border-radius:18px; }
+  .contact-form{ padding:18px; }
+}
+/* Small mobile 480 */
+@media(max-width:480px){
+  .hero h1{ font-size:38px; }
+  .hero h1 i{ font-size:26px; }
+  .hero-photo{ height:360px; border-radius:22px; }
+  .hero-float{ padding:10px 12px; border-radius:16px; }
+  .hero-float b{ font-size:13px; }
+  .section-header h2{ font-size:28px; }
+  .gallery-grid{ grid-template-columns:1fr 1fr; gap:10px; }
+  .g-item{ height:160px; border-radius:16px; }
+  .menu-body h3{ font-size:17px; }
+  .promo span{ display:inline-block; margin-top:4px; }
+}
+/* Touch optimization */
+@media(hover:none){
+  .menu-card:hover{ transform:none; }
+  .menu-card:active{ transform:scale(.98); }
+}
+*{ -webkit-tap-highlight-color:transparent; }
+html{ scroll-behavior:smooth; scroll-padding-top:90px; }
+</style>
+</head>
+<body>
+
+<div class="promo">🔥 عرض اليوم: قهوة عادية <span>30 دج فقط</span> • من 7 صباحا حتى 11 ليلا — حي الحمراء</div>
+
+<nav class="navbar" id="navbar">
+  <div class="nav-logo">قهوة رحيم<span>QAHWAT RAHIM • SINCE 2009</span></div>
+  <ul class="nav-links">
+    <li><a href="#home">الرئيسية</a></li>
+    <li><a href="#about">من نحن</a></li>
+    <li><a href="#menu">القائمة</a></li>
+    <li><a href="#gallery">الصور</a></li>
+    <li><a href="#contact" class="cta">اطلب الآن</a></li>
+  </ul>
+  <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+</nav>
+
+<section class="hero" id="home">
+  <div class="hero-text">
+    <div class="hero-badge">✨ ألذ قهوة في الجزائر العاصمة • تقييم 4.9/5</div>
+    <h1>قهوة <em>رحيم</em><i>طعم يذوّب القلب</i></h1>
+    <p class="subtitle">قهوة محمصة يوميا، حليب طازج، ومعجنات تخرج فرن .. كلشي بأسعار جزائرية طبيعية</p>
+    <p class="tagline">من 30 دج إلى 250 دج • بسبوسة سخونة و كرواسون مقرمش</p>
+    <div class="hero-btns">
+      <a href="#menu" class="btn btn-primary">🍽️ شوف القائمة اللذيذة</a>
+      <a href="tel:+213551234567" class="btn btn-ghost">📞 اتصل بنا</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-card">
+      <div class="hero-photo">
+        <img src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=900&q=80" alt="قهوة رحيم">
+        <div class="steam"></div><div class="steam s2"></div><div class="steam s3"></div>
+      </div>
+      <div class="hero-float float-1">
+        <div class="f-icon">🔥</div>
+        <div><b>قهوة 30 دج</b><br><span>قهوة عادية سخونة</span></div>
+        <b style="color:var(--caramel)">30 دج</b>
+      </div>
+      <div class="hero-float float-2">
+        <div class="f-icon">⭐</div>
+        <div><b>4.9/5 • 2,400 تقييم</b><br><span>الزبائن يحبونا</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="section-header">
+    <div class="label">قصتنا • Notre histoire</div>
+    <h2>ريحة القهوة ..<br>من 2009</h2>
+    <p>مقهى عائلي، نحمصو القهوة كل صباح، ونطيبو المعجنات في الفرن قدامكم</p>
+  </div>
+  <div class="about-grid">
+    <div class="about-photos">
+      <div class="ph ph-big"><img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=700&q=80" alt="barista"></div>
+      <div class="ph ph-sm"><img src="https://images.unsplash.com/photo-1559925393-8be0ec47690c?auto=format&fit=crop&w=500&q=80" alt="latte"></div>
+      <div class="ph ph-sm"><img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=500&q=80" alt="pastry"></div>
+    </div>
+    <div class="about-text">
+      <h3>ماشي غير قهوة .. تجربة!</h3>
+      <p>في <b>قهوة رحيم</b>، كل فنجان فيه حكاية. نجيبو حبوب أرابيكا من افريقيا، نحمصوها على نار هادية، ونقدموها بطريقة جزائرية أصيلة مع لمسة عصرية.</p>
+      <p>المعجنات؟ كلها <b>منزلية 100%</b>: بسبوسة بالقشطة، كرواسون بالزبدة الفرنسية، و طقم حلويات جزائرية يذوب في الفم.</p>
+      <div class="about-stats">
+        <div class="stat"><div class="number">15+</div><div class="text">سنة خبرة</div></div>
+        <div class="stat"><div class="number">500+</div><div class="text">زبون يوميا</div></div>
+        <div class="stat"><div class="number">30 دج</div><div class="text">أرخص قهوة</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="menu" id="menu">
+  <div class="section-header">
+    <div class="label">القائمة اللذيذة • Menu Gourmand</div>
+    <h2>تذوّق .. و استمتع</h2>
+    <p>كلشي طازج، كلشي بنين، وكلشي بأسعار في متناول الجميع من 30 دج</p>
+  </div>
+  <div class="menu-tabs">
+    <button class="menu-tab active" onclick="filterMenu('all',this)">الكل 😋</button>
+    <button class="menu-tab" onclick="filterMenu('coffee',this)">☕ القهوة</button>
+    <button class="menu-tab" onclick="filterMenu('tea',this)">🍵 الشاي</button>
+    <button class="menu-tab" onclick="filterMenu('pastry',this)">🥐 المعجنات</button>
+    <button class="menu-tab" onclick="filterMenu('smoothie',this)">🥭 العصائر</button>
+  </div>
+  <div class="menu-grid" id="menuGrid"></div>
+</section>
+
+<section class="hours-section" id="hours">
+  <div class="section-header">
+    <div class="label">ساعات العمل</div>
+    <h2>نستناكم كل يوم</h2>
+  </div>
+  <div class="hours-grid">
+    <div class="hour-item"><span class="day">السبت - الأربعاء</span><span class="time">07:00 - 23:00</span></div>
+    <div class="hour-item"><span class="day">الخميس</span><span class="time">07:00 - 00:00 🔥</span></div>
+    <div class="hour-item"><span class="day">الجمعة</span><span class="time">08:00 - 00:00 ☕</span></div>
+  </div>
+</section>
+
+<section class="gallery" id="gallery">
+  <div class="section-header">
+    <div class="label">معرض الصور</div>
+    <h2>شوف بعينك .. بنّة لا تقاوم</h2>
+  </div>
+  <div class="gallery-grid">
+    <div class="g-item"><img src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=800&q=80"><div class="g-overlay">☕ قهوة تركية بالهيل</div></div>
+    <div class="g-item"><img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=600&q=80"><div class="g-overlay">🍰 بسبوسة سخونة</div></div>
+    <div class="g-item"><img src="https://images.unsplash.com/photo-1571934811356-5cc061b6821f?auto=format&fit=crop&w=600&q=80"><div class="g-overlay">🍵 أتاي بالنعناع</div></div>
+    <div class="g-item"><img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=600&q=80"><div class="g-overlay">🥐 كرواسون مقرمش</div></div>
+    <div class="g-item"><img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=900&q=80"><div class="g-overlay">🥭 عصائر طبيعية 100%</div></div>
+    <div class="g-item"><img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=600&q=80"><div class="g-overlay">🏪 أجواء دافئة</div></div>
+    <div class="g-item"><img src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=600&q=80"><div class="g-overlay">✨ لاتيه آرت</div></div>
+  </div>
+</section>
+
+<section class="reviews" id="reviews">
+  <div class="section-header">
+    <div class="label">آراء الزبائن</div>
+    <h2>الناس تهدر علينا ❤️</h2>
+  </div>
+  <div class="reviews-grid">
+    <div class="review-card"><div class="q">“</div><p>أحسن قهوة 30 دج في العاصمة! والبسبوسة تذوب في الفم، نجي كل يوم مع صحابي.</p><div class="author"><div class="avatar">أ</div><div><b>أحمد م.</b><div class="stars">★★★★★</div></div></div></div>
+    <div class="review-card"><div class="q">“</div><p>كرواسون الصباح مع لاتيه 200 دج .. بنة عالمية وسعر هايل! ربي يبارك.</p><div class="author"><div class="avatar">س</div><div><b>سمية ك.</b><div class="stars">★★★★★</div></div></div></div>
+    <div class="review-card"><div class="q">“</div><p>أتاي بالنعناع 60 دج وليمونادة 60 دج .. منعش وأسعار في متناول الجميع. برافو رحيم!</p><div class="author"><div class="avatar">م</div><div><b>محمد ر.</b><div class="stars">★★★★★</div></div></div></div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="section-header">
+    <div class="label">تواصل معنا</div>
+    <h2>جوعت؟ عطشت؟ نحن هنا</h2>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <div class="c-item"><div class="ic">📍</div><div><h4>حي الحمراء - الجزائر العاصمة</h4><p>بجانب مسجد الرحمة، مقابل الحديقة</p></div></div>
+      <div class="c-item"><div class="ic">📞</div><div><h4>+213 55 123 4567</h4><p>توصيل مجاني ابتداء من 500 دج</p></div></div>
+      <div class="c-item"><div class="ic">⏰</div><div><h4>07:00 - 23:00 كل يوم</h4><p>الخميس والجمعة حتى منتصف الليل</p></div></div>
+    </div>
+    <form class="contact-form" onsubmit="handleSubmit(event)">
+      <div class="form-group"><label>الاسم</label><input type="text" placeholder="اسمك الكريم" required></div>
+      <div class="form-group"><label>الهاتف</label><input type="tel" placeholder="05 12 34 56 78" required></div>
+      <div class="form-group"><label>رسالتك</label><textarea rows="3" placeholder="ماذا تريد أن تطلب؟" required></textarea></div>
+      <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">إرسال ✨</button>
+    </form>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-logo">قهوة رحيم</div>
+  <p>© 2024 Qahwat Rahim — بنّة جزائرية أصيلة • من 30 دج</p>
+  <div class="social"><a href="#">📘</a><a href="#">📷</a><a href="#">💬</a><a href="#">🎵</a></div>
+</footer>
+
+<button class="back-to-top" id="backToTop" onclick="scrollToTop()">↑</button>
+
+<script>
+const menuItems = [
+  { name:"قهوة عادية", price:"30", category:"coffee", desc:"قهوة سوداء تقليدية سخونة، بنّة زمان — الأكثر طلبا!", tags:["🔥 الأكثر طلبا","تقليدية"], cal:"5 سعرة", img:"https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=600&q=80", badge:"⭐ 30 دج فقط", featured:true },
+  { name:"قهوة تركية بالهيل", price:"80", category:"coffee", desc:"قهوة عربية بالهيل والزعفران، ريحتها ترد الروح", tags:["هيل","تقليدية"], cal:"5 سعرة", img:"https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=600&q=80", badge:null },
+  { name:"إسبريسو", price:"100", category:"coffee", desc:"إسبريسو مركز، كريمة ذهبية، قوة و نكهة", tags:["قوي","كلاسيك"], cal:"3 سعرة", img:"https://images.unsplash.com/photo-1510707577719-ae7c14805e3a?auto=format&fit=crop&w=600&q=80", badge:null },
+  { name:"دابل إسبريسو", price:"150", category:"coffee", desc:"جرعة مضاعفة للناس اللي تحب القوة", tags:["مكثف"], cal:"5 سعرة", img:"https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=600&q=80", badge:null },
+  { name:"كابتشينو كريمي", price:"180", category:"coffee", desc:"رغوة حليب ناعمة كالحرير فوق إسبريسو", tags:["كريمي","حليب"], cal:"120 سعرة", img:"https://images.unsplash.com/photo-1485808191679-5f86510681a2?auto=format&fit=crop&w=600&q=80", badge:"❤️ بنين" },
+  { name:"لاتيه", price:"200", category:"coffee", desc:"حليب طازج مع إسبريسو، لطيف ودافئ", tags:["ناعم"], cal:"150 سعرة", img:"https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=600&q=80", badge:null },
+  { name:"موكا شوكولاتة", price:"250", category:"coffee", desc:"قهوة + شوكولاتة داكنة ذائبة .. جنة!", tags:["شوكولاتة"], cal:"200 سعرة", img:"https://images.unsplash.com/photo-1578328819058-b69f3a3b0f6b?auto=format&fit=crop&w=600&q=80", badge:null },
+  { name:"آيس كابتشينو", price:"200", category:"coffee", desc:"مثلج، منعش، يبرد القلب في الصيف", tags:["مثلج"], cal:"130 سعرة", img:"https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=600&q=80", badge:null },
+  { name:"كولد برو", price:"150", category:"coffee", desc:"منقوع 12 ساعة، ناعم وحلو طبيعيا", tags:["بارد"], cal:"5 سعرة", img:"https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80", badge:null },
+
+  { name:"أتاي بالنعناع", price:"60", category:"tea", desc:"أتاي أخضر بالنعناع الطازج والعسل الحر", tags:["منعش"], cal:"10 سعرة", img:"https://images.unsplash.com/photo-1571934811356-5cc061b6821f?auto=format&fit=crop&w=600&q=80", badge:null },
+  { name:"شاي بالحليب والقرفة", price:"100", category:"tea", desc:"شاي أحمر دافئ مع حليب ورشة قرفة", tags:["دافئ"], cal:"80 سعرة", img:"https://images.unsplash.com/photo-1544787219-7f47cc556763?auto=format&fit=crop&w=600&q=80", badge:null },
+  { name:"أتاي بالسلّم", price:"80", category:"tea", desc:"خلطة أعشاب جزائرية سرية، مفيد و بنين", tags:["خاص"], cal:"15 سعرة", img:"https://images.unsplash.com/photo-1564890369478-c89ca64c94ea?auto=format&fit=crop&w=600&q=80", badge:null },
+  { name:"شاي أخضر بالليمون", price:"60", category:"tea", desc:"صحي، خفيف، مع شرائح ليمون طازجة", tags:["صحي"], cal:"5 سعرة", img:"https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=600&q=80", badge:null },
+
+  { name:"كرواسون مقرمش", price:"80", category:"pastry", desc:"مقرمش من برا، طري من داخل، بالزبدة", tags:["طازج"], cal:"250 سعرة", img:"https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=600&q=80", badge:"🥐 سخون" },
+  { name:"بسبوسة بالقشطة", price:"120", category:"pastry", desc:"بسبوسة ذهبية بالقشطة واللوز، تذوب!", tags:["حلوى"], cal:"350 سعرة", img:"https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=600&q=80", badge:"⭐ بنّة" },
+  { name:"كراتين هواري", price:"150", category:"pastry", desc:"كراتين بالكراميل والقشطة المنزلية", tags:["كراميل"], cal:"300 سعرة", img:"https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=600&q=80", badge:null },
+  { name:"طقم حلويات", price:"250", category:"pastry", desc:"مقروط، غريبية، قلب اللوز — طقم كامل", tags:["متنوع"], cal:"400 سعرة", img:"https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?auto=format&fit=crop&w=600&q=80", badge:null },
+  { name:"تيراميسو", price:"200", category:"pastry", desc:"تيراميسو إيطالي بقهوة رحيم الخاصة", tags:["قهوة"], cal:"350 سعرة", img:"https://images.unsplash.com/photo-1571877222312-a9413620ddfe?auto=format&fit=crop&w=600&q=80", badge:null },
+
+  { name:"عصير مانجو طازج", price:"150", category:"smoothie", desc:"مانجو طبيعي 100% بدون سكر، منعش!", tags:["طبيعي"], cal:"120 سعرة", img:"https://images.unsplash.com/photo-1623065422902-30a2d299bbe4?auto=format&fit=crop&w=600&q=80", badge:null },
+  { name:"عصير متنوع", price:"120", category:"smoothie", desc:"برتقال + جزر + شمندر، فيتامينات", tags:["صحي"], cal:"90 سعرة", img:"https://images.unsplash.com/photo-1544148103-005eec06c04d?auto=format&fit=crop&w=600&q=80", badge:null },
+  { name:"موز بالحليب", price:"130", category:"smoothie", desc:"موز + حليب + عسل، كريمي ولذيذ", tags:["طاقة"], cal:"200 سعرة", img:"https://images.unsplash.com/photo-1488477181946-64290103bb53?auto=format&fit=crop&w=600&q=80", badge:null },
+  { name:"ليمونادة بالنعناع", price:"60", category:"smoothie", desc:"ليمونادة منزلية بالنعناع، تروي العطش", tags:["منعشة"], cal:"80 سعرة", img:"https://images.unsplash.com/photo-1523677011781-c91d1bbe2f9e?auto=format&fit=crop&w=600&q=80", badge:null },
+  { name:"سموذي فراولة", price:"180", category:"smoothie", desc:"فراولة + حليب + مكسرات، بنين بزاف", tags:["حليب"], cal:"250 سعرة", img:"https://images.unsplash.com/photo-1505252585461-04db1eb84625?auto=format&fit=crop&w=600&q=80", badge:null },
+];
+
+function renderMenu(filter){
+  const grid=document.getElementById('menuGrid');
+  const list=filter==='all'?menuItems:menuItems.filter(i=>i.category===filter);
+  grid.innerHTML=list.map((it,i)=>`
+    <div class="menu-card ${it.featured?'card-30':''}" style="animation:fadeIn .4s ease ${i*0.04}s both">
+      <div class="menu-img">
+        <img src="${it.img}" alt="${it.name}" loading="lazy">
+        <span class="price-badge">${it.price} دج</span>
+        ${it.badge?`<span class="top-badge">${it.badge}</span>`:''}
+      </div>
+      <div class="menu-body">
+        <h3>${it.name}</h3>
+        <p class="desc">${it.desc}</p>
+        <div class="menu-footer">
+          <div class="tags">${it.tags.map(t=>`<span class="menu-tag">${t}</span>`).join('')}</div>
+          <span class="cal">🔥 ${it.cal}</span>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+function filterMenu(cat,btn){
+  document.querySelectorAll('.menu-tab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderMenu(cat);
+}
+window.addEventListener('scroll',()=>{
+  document.getElementById('navbar').classList.toggle('scrolled',scrollY>50);
+  document.getElementById('backToTop').classList.toggle('visible',scrollY>500);
+});
+function scrollToTop(){ scrollTo({top:0,behavior:'smooth'}); }
+function toggleMenu(){
+  document.querySelector('.nav-links').classList.toggle('open');
+}
+function handleSubmit(e){ e.preventDefault(); alert('تم! سنتواصل معك حالا 📩❤️'); e.target.reset(); }
+document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{
+  e.preventDefault();
+  document.querySelector('.nav-links').classList.remove('open');
+  document.querySelector(a.getAttribute('href'))?.scrollIntoView({behavior:'smooth'});
+}));
+// close menu on outside click
+document.addEventListener('click',e=>{
+  if(!e.target.closest('.navbar')) document.querySelector('.nav-links').classList.remove('open');
+});
+renderMenu('all');
+</script>
+</body>
+</html>
